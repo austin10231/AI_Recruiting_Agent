@@ -2,6 +2,9 @@
 
 A Python-based multi-step recruiting agent for the OCBridge take-home assignment.
 
+## Requirements
+- Python 3.11+
+
 ## What This Project Does
 - Runs a fixed 5-step sequential LLM pipeline
 - Produces required `output.json` schema
@@ -18,7 +21,8 @@ Pipeline steps:
 ## Quick Start
 
 ```bash
-cd /Users/mr.tian/Desktop/AI_Recruiting_Agent
+git clone https://github.com/austin10231/AI_Recruiting_Agent.git
+cd AI_Recruiting_Agent
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -29,6 +33,12 @@ python main.py
 
 Output:
 - `output.json`
+
+Run with a custom input file:
+
+```bash
+python main.py data/input.json
+```
 
 ## Input Format
 
