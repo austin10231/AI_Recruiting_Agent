@@ -103,14 +103,9 @@ export default function App() {
             className="animate-reveal rounded-3xl border border-ink/10 bg-paper/90 p-6 shadow-card"
             style={{ animationDelay: "80ms" }}
           >
-            <div className="flex items-center justify-between gap-3">
-              <h2 className="font-title text-2xl text-ink">Role Intake</h2>
-              <span className="rounded-full bg-moss/10 px-3 py-1 text-xs tracking-wide text-moss">
-                API: {API_BASE_URL}
-              </span>
-            </div>
+            <h2 className="font-title text-2xl text-ink">Job Details</h2>
 
-            <label className="mt-5 block text-xs uppercase tracking-[0.16em] text-ink/60">Job Description</label>
+            <label className="mt-5 block text-xs uppercase tracking-[0.16em] text-ink/60">Job Description (JD)</label>
             <textarea
               value={form.job_description}
               onChange={onChange("job_description")}
@@ -119,7 +114,7 @@ export default function App() {
             />
 
             <label className="mt-5 block text-xs uppercase tracking-[0.16em] text-ink/60">
-              Hiring Manager Notes (Optional)
+              Manager Notes (Optional)
             </label>
             <textarea
               value={form.hiring_manager_notes}
@@ -158,7 +153,7 @@ export default function App() {
             className="animate-reveal rounded-3xl border border-ink/10 bg-paper/90 p-6 shadow-card"
             style={{ animationDelay: "140ms" }}
           >
-            <h2 className="font-title text-2xl text-ink">Output Snapshot</h2>
+            <h2 className="font-title text-2xl text-ink">Results</h2>
             {!result ? (
               <p className="mt-5 rounded-2xl border border-dashed border-ink/25 bg-white/80 p-6 text-sm text-ink/60">
                 No output yet. Run the pipeline to render strategy, query, outreach, summary, and trace.
@@ -167,7 +162,7 @@ export default function App() {
               <div className="mt-5 grid gap-3">
                 <div className="grid gap-3 md:grid-cols-2 md:items-stretch">
                   <div className="h-full rounded-xl border border-ink/10 bg-white/90 p-3 shadow-soft">
-                    <p className="text-[11px] uppercase tracking-[0.16em] text-ink/55">Boolean Query</p>
+                    <p className="text-[11px] uppercase tracking-[0.16em] text-ink/55">Search Query</p>
                     {(() => {
                       const queryText = result?.boolean_query?.boolean_query || "-";
                       const hasRealQuery = queryText !== "-";
@@ -186,20 +181,20 @@ export default function App() {
                               onClick={() => setShowFullQuery((prev) => !prev)}
                               className="mt-2 text-xs text-moss underline-offset-2 hover:underline"
                             >
-                              {showFullQuery ? "Show less query" : "Show full query"}
+                              {showFullQuery ? "Show less" : "Show full query"}
                             </button>
                           )}
                         </>
                       );
                     })()}
                   </div>
-                  <DataTag label="Outreach" value={result?.outreach_message?.outreach_message} />
+                  <DataTag label="Message Draft" value={result?.outreach_message?.outreach_message} />
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <DataTag label="Specific Detail" value={result?.outreach_message?.specific_detail} />
-                  <DataTag label="Characters" value={String(result?.outreach_message?.character_count ?? "-")} />
-                  <DataTag label="Candidate" value={result?.candidate_summary?.name} />
-                  <DataTag label="Company" value={result?.candidate_summary?.current_company} />
+                  <DataTag label="JD Detail Used" value={result?.outreach_message?.specific_detail} />
+                  <DataTag label="Message Length" value={String(result?.outreach_message?.character_count ?? "-")} />
+                  <DataTag label="Candidate Name" value={result?.candidate_summary?.name} />
+                  <DataTag label="Current Company" value={result?.candidate_summary?.current_company} />
                 </div>
               </div>
             )}
@@ -209,22 +204,22 @@ export default function App() {
         <section className="mt-5 grid gap-4 lg:grid-cols-2">
           <div className="animate-reveal" style={{ animationDelay: "180ms" }}>
             <ChipBlock
-              title="Target Backgrounds"
+              title="Ideal Backgrounds"
               items={result?.candidate_search_strategy?.target_backgrounds || []}
             />
           </div>
           <div className="animate-reveal" style={{ animationDelay: "210ms" }}>
             <ChipBlock
-              title="Target Companies"
+              title="Ideal Companies"
               items={result?.candidate_search_strategy?.target_companies || []}
             />
           </div>
           <div className="animate-reveal" style={{ animationDelay: "240ms" }}>
-            <ChipBlock title="Keywords" items={result?.candidate_search_strategy?.keywords || []} />
+            <ChipBlock title="Key Terms" items={result?.candidate_search_strategy?.keywords || []} />
           </div>
           <div className="animate-reveal" style={{ animationDelay: "270ms" }}>
             <ChipBlock
-              title="Candidate Skills"
+              title="Skills to Look For"
               items={result?.candidate_summary?.key_skills || []}
             />
           </div>
@@ -235,13 +230,13 @@ export default function App() {
           style={{ animationDelay: "310ms" }}
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h3 className="font-title text-2xl text-ink">Pipeline Trace</h3>
+            <h3 className="font-title text-2xl text-ink">Run Log</h3>
             <button
               type="button"
               onClick={() => setShowTrace((prev) => !prev)}
               className="rounded-full border border-ink/20 bg-white/85 px-4 py-1.5 text-xs tracking-wide text-ink transition hover:bg-white"
             >
-              {showTrace ? "Hide Pipeline Trace" : "Show Pipeline Trace"}
+              {showTrace ? "Hide Run Log" : "Show Run Log"}
             </button>
           </div>
 
@@ -277,7 +272,7 @@ export default function App() {
             )
           ) : (
             <p className="mt-4 text-sm text-ink/60">
-              Trace is collapsed by default. Expand to inspect step-by-step execution details.
+              Run log is collapsed by default. Expand to inspect step-by-step details.
             </p>
           )}
         </section>
