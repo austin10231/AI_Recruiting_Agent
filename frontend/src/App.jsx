@@ -89,6 +89,9 @@ export default function App() {
       <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
         <header className="animate-reveal rounded-3xl border border-ink/10 bg-paper/95 p-7 shadow-card">
           <p className="text-xs uppercase tracking-[0.24em] text-moss">Recruiting Copilot</p>
+          <p className="mt-2 text-xs uppercase tracking-[0.2em] text-ink/55">
+            OCBridge Take-Home Assignment · Mutian (Austin) He
+          </p>
           <h1 className="mt-3 font-title text-3xl leading-tight text-ink sm:text-4xl">
             Structured Hiring Workflow, Built for Real Recruiters
           </h1>
