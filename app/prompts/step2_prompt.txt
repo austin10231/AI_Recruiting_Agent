@@ -1,0 +1,16 @@
+Use the extracted JD signals to generate candidate sourcing strategy. Return JSON only.
+
+Input:
+- jd_signals: <<jd_signals>>
+
+Return exactly this JSON shape:
+{
+  "target_backgrounds": ["string"],
+  "target_companies": ["string"],
+  "keywords": ["string"],
+  "seniority": "string"
+}
+
+Rules:
+- Make strategy startup-aware and role-specific.
+- If seniority is ambiguous, still choose a practical recommendation and keep it explicit.

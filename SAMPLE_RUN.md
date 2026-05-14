@@ -1,0 +1,91 @@
+# Sample Run
+
+This sample run is kept outside the main README to keep README concise.
+
+## Terminal Output
+
+```bash
+$ python main.py
+Pipeline run complete. Wrote /Users/mr.tian/Desktop/AI_Recruiting_Agent/output.json
+```
+
+## Generated `output.json`
+
+```json
+{
+  "candidate_search_strategy": {
+    "target_backgrounds": [
+      "Applied AI Engineer",
+      "ML Engineer"
+    ],
+    "target_companies": [
+      "AI startups",
+      "product-focused tech teams"
+    ],
+    "keywords": [
+      "Python",
+      "LLM",
+      "Generative AI"
+    ],
+    "seniority": "mid-to-senior"
+  },
+  "boolean_query": {
+    "boolean_query": "(\"Python\" OR \"LLM\") AND startup"
+  },
+  "outreach_message": {
+    "outreach_message": "Hi, your work on LLM-powered features looks relevant to our startup AI role. Would you be open to a quick intro chat this week?",
+    "specific_detail": "LLM-powered features",
+    "character_count": 127,
+    "attempts": 1
+  },
+  "candidate_summary": {
+    "name": "Alex Chen",
+    "current_company": "NovaAI",
+    "key_skills": [
+      "Python",
+      "LLM",
+      "MLOps"
+    ],
+    "fit_reason": "Strong match with JD focus on LLM feature delivery in startup settings.",
+    "concerns": "Need deeper validation of domain depth and leadership scope."
+  },
+  "pipeline_trace": [
+    {
+      "step": 1,
+      "action": "extract_jd_signals",
+      "attempt": 1,
+      "result": "pass",
+      "note": "JD signals extracted."
+    },
+    {
+      "step": 2,
+      "action": "generate_search_strategy",
+      "attempt": 1,
+      "result": "pass",
+      "note": "Candidate search strategy generated."
+    },
+    {
+      "step": 3,
+      "action": "generate_boolean_query",
+      "attempt": 1,
+      "result": "pass",
+      "note": "Boolean query generated."
+    },
+    {
+      "step": 4,
+      "action": "generate_outreach_message",
+      "attempt": 1,
+      "result": "pass",
+      "note": "Outreach passed validation checks."
+    },
+    {
+      "step": 5,
+      "action": "generate_candidate_summary",
+      "attempt": 1,
+      "result": "pass",
+      "note": "Candidate summary generated."
+    }
+  ]
+}
+```
+

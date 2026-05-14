@@ -1,0 +1,21 @@
+Generate one candidate summary card using prior pipeline context and internal mock candidate seed. Return JSON only.
+
+Inputs:
+- jd_signals: <<jd_signals>>
+- candidate_search_strategy: <<candidate_search_strategy>>
+- boolean_query: <<boolean_query>>
+- outreach_message: <<outreach_message>>
+- mock_candidate_seed: <<mock_candidate_seed>>
+
+Return exactly this JSON shape:
+{
+  "name": "string",
+  "current_company": "string",
+  "key_skills": ["string"],
+  "fit_reason": "string",
+  "concerns": "string"
+}
+
+Rules:
+- key_skills should contain 3 to 5 relevant skills.
+- Candidate can be mock, but reasoning must align with upstream pipeline context.

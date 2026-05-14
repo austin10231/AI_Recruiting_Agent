@@ -1,0 +1,14 @@
+Generate one sourcing-style Boolean query. Return JSON only.
+
+Inputs:
+- jd_signals: <<jd_signals>>
+- candidate_search_strategy: <<candidate_search_strategy>>
+
+Return exactly this JSON shape:
+{
+  "boolean_query": "string"
+}
+
+Rules:
+- Output one single query usable on LinkedIn-like search.
+- Keep it concise and high-signal.

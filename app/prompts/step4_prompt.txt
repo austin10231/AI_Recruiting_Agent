@@ -1,0 +1,21 @@
+Write a personalized recruiting outreach message and return JSON only.
+
+Inputs:
+- jd_signals: <<jd_signals>>
+- candidate_search_strategy: <<candidate_search_strategy>>
+- boolean_query: <<boolean_query>>
+- required_specific_detail: <<specific_detail>>
+- prior_feedback_if_any: <<feedback>>
+- attempt: <<attempt>>/<<max_attempts>>
+
+Return exactly this JSON shape:
+{
+  "outreach_message": "string",
+  "specific_detail": "string"
+}
+
+Hard constraints:
+- Outreach message must be under 300 characters.
+- Outreach must include the exact required_specific_detail phrase.
+- Tone must be personalized, startup-oriented, and not generic.
+- specific_detail must equal the detail phrase used in outreach_message.

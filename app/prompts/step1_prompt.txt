@@ -1,0 +1,19 @@
+Analyze the recruiting input and return JSON only.
+
+Inputs:
+- job_description: <<job_description>>
+- hiring_manager_notes: <<hiring_manager_notes>>
+
+Return exactly this JSON shape:
+{
+  "role_type": "string",
+  "required_skills": ["string"],
+  "seniority_indicators": ["string"],
+  "company_stage": "string",
+  "missing_information": ["string"],
+  "jd_specific_details": ["string"]
+}
+
+Rules:
+- Extract concrete JD details in jd_specific_details (exact or near-exact JD phrases).
+- Keep arrays concise and practical for downstream recruiting steps.
