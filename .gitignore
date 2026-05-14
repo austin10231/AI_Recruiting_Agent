@@ -6,10 +6,13 @@ __pycache__/
 .venv/
 venv/
 
+# Frontend build/deps
+frontend/node_modules/
+frontend/dist/
+
 # Local environment secrets
 .env
 .env.*
 
 # macOS
 .DS_Store
-
