@@ -160,7 +160,7 @@ export default function App() {
               </p>
             ) : (
               <div className="mt-5 grid gap-3">
-                <div className="grid gap-3 md:grid-cols-2 md:items-stretch">
+                <div className="grid grid-cols-2 gap-3 items-stretch">
                   <div className="h-full rounded-xl border border-ink/10 bg-white/90 p-3 shadow-soft">
                     <p className="text-[11px] uppercase tracking-[0.16em] text-ink/55">Search Query</p>
                     {(() => {
