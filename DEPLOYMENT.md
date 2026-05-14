@@ -13,7 +13,7 @@ This project is ready for frontend/backend separation:
 4. Add environment variables in Railway:
    - `OPENAI_API_KEY=<your_real_key>`
    - `OPENAI_MODEL=gpt-4o-mini` (optional)
-   - `OPENAI_TEMPERATURE=0.2` (optional)
+   - `OPENAI_TEMPERATURE=` (optional, recommended empty for model default)
    - `CORS_ORIGINS=https://<your-pages-domain>,https://<your-custom-domain>`
 5. Deploy and copy your backend URL, for example:
    - `https://your-backend.up.railway.app`
@@ -51,4 +51,3 @@ This project is ready for frontend/backend separation:
 - Keep `.env.example` only.
 - Put real secrets only in Railway environment variables.
 - Do not expose OpenAI key in frontend code or Cloudflare frontend env vars.
-

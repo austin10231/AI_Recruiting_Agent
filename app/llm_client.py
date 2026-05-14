@@ -21,7 +21,7 @@ class LLMClient:
     def __init__(self) -> None:
         self.api_key = os.getenv("OPENAI_API_KEY", "").strip()
         self.model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
-        self.temperature = float(os.getenv("OPENAI_TEMPERATURE", "0.2"))
+        self.temperature = self._read_temperature()
         self.mock_mode = not bool(self.api_key)
         self._client = OpenAI(api_key=self.api_key) if not self.mock_mode else None
 
@@ -35,11 +35,22 @@ class LLMClient:
             messages.append({"role": "system", "content": system_prompt})
         messages.append({"role": "user", "content": prompt})
 
-        resp = self._client.chat.completions.create(
-            model=self.model,
-            temperature=self.temperature,
-            messages=messages,
-        )
+        kwargs: dict[str, Any] = {
+            "model": self.model,
+            "messages": messages,
+        }
+        if self.temperature is not None:
+            kwargs["temperature"] = self.temperature
+
+        try:
+            resp = self._client.chat.completions.create(**kwargs)
+        except Exception as exc:
+            # Some newer models only support default temperature.
+            if "temperature" in str(exc).lower() and "support" in str(exc).lower():
+                kwargs.pop("temperature", None)
+                resp = self._client.chat.completions.create(**kwargs)
+            else:
+                raise
         content = resp.choices[0].message.content
         return content.strip() if content else ""
 
@@ -84,3 +95,14 @@ class LLMClient:
             raise ValueError("No JSON object found in model response.")
 
         return json.loads(text[start : end + 1])
+
+    @staticmethod
+    def _read_temperature() -> float | None:
+        """Read optional temperature from env.
+
+        If not set, caller will omit temperature entirely and let model defaults apply.
+        """
+        raw = os.getenv("OPENAI_TEMPERATURE", "").strip()
+        if not raw:
+            return None
+        return float(raw)
