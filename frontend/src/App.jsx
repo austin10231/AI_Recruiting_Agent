@@ -12,21 +12,24 @@ const initialForm = {
 
 function DataTag({ label, value }) {
   return (
-    <div className="rounded-xl border border-ink/10 bg-white/90 p-3 shadow-soft">
+    <div className="h-full rounded-xl border border-ink/10 bg-white/90 p-3 shadow-soft">
       <p className="text-[11px] uppercase tracking-[0.16em] text-ink/55">{label}</p>
-      <p className="mt-1 text-sm text-ink/90">{value || "-"}</p>
+      <p className="mt-1 break-words text-sm text-ink/90">{value || "-"}</p>
     </div>
   );
 }
 
-function ListBlock({ title, items }) {
+function ChipBlock({ title, items }) {
   return (
     <section className="rounded-2xl border border-ink/10 bg-paper/85 p-4 shadow-soft">
       <h4 className="font-body text-xs uppercase tracking-[0.18em] text-ink/55">{title}</h4>
       {items?.length ? (
-        <ul className="mt-3 grid gap-2 text-sm text-ink/90">
+        <ul className="mt-3 flex flex-wrap gap-2 text-sm text-ink/90">
           {items.map((item) => (
-            <li key={item} className="rounded-lg border border-ink/10 bg-white/80 px-3 py-2">
+            <li
+              key={item}
+              className="rounded-full border border-ink/15 bg-white/90 px-3 py-1.5 text-xs tracking-wide"
+            >
               {item}
             </li>
           ))}
@@ -43,6 +46,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState(null);
+  const [showTrace, setShowTrace] = useState(false);
+  const [showFullQuery, setShowFullQuery] = useState(false);
 
   const canSubmit = useMemo(() => form.job_description.trim().length > 0, [form.job_description]);
 
@@ -69,6 +74,8 @@ export default function App() {
       }
 
       setResult(payload);
+      setShowFullQuery(false);
+      setShowTrace(false);
     } catch (err) {
       setError(err.message || "Unexpected network error.");
     } finally {
@@ -91,7 +98,7 @@ export default function App() {
           </p>
         </header>
 
-        <section className="mt-8 grid gap-6 lg:grid-cols-[1.05fr_1fr]">
+        <section className="mt-6 grid gap-5 lg:grid-cols-[1.05fr_1fr]">
           <article
             className="animate-reveal rounded-3xl border border-ink/10 bg-paper/90 p-6 shadow-card"
             style={{ animationDelay: "80ms" }}
@@ -157,20 +164,40 @@ export default function App() {
                 No output yet. Run the pipeline to render strategy, query, outreach, summary, and trace.
               </p>
             ) : (
-              <div className="mt-5 grid gap-4">
-                <DataTag
-                  label="Boolean Query"
-                  value={result?.boolean_query?.boolean_query}
-                />
-                <DataTag
-                  label="Outreach"
-                  value={result?.outreach_message?.outreach_message}
-                />
+              <div className="mt-5 grid gap-3">
+                <div className="grid gap-3 md:grid-cols-2 md:items-stretch">
+                  <div className="h-full rounded-xl border border-ink/10 bg-white/90 p-3 shadow-soft">
+                    <p className="text-[11px] uppercase tracking-[0.16em] text-ink/55">Boolean Query</p>
+                    {(() => {
+                      const queryText = result?.boolean_query?.boolean_query || "-";
+                      const hasRealQuery = queryText !== "-";
+                      return (
+                        <>
+                    <div
+                      className={`mt-1 break-words text-sm text-ink/90 ${
+                        showFullQuery ? "max-h-72 overflow-y-auto pr-1" : "max-h-24 overflow-hidden"
+                      }`}
+                    >
+                          {queryText}
+                    </div>
+                          {hasRealQuery && (
+                            <button
+                              type="button"
+                              onClick={() => setShowFullQuery((prev) => !prev)}
+                              className="mt-2 text-xs text-moss underline-offset-2 hover:underline"
+                            >
+                              {showFullQuery ? "Show less query" : "Show full query"}
+                            </button>
+                          )}
+                        </>
+                      );
+                    })()}
+                  </div>
+                  <DataTag label="Outreach" value={result?.outreach_message?.outreach_message} />
+                </div>
                 <div className="grid gap-3 sm:grid-cols-2">
                   <DataTag label="Specific Detail" value={result?.outreach_message?.specific_detail} />
                   <DataTag label="Characters" value={String(result?.outreach_message?.character_count ?? "-")} />
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
                   <DataTag label="Candidate" value={result?.candidate_summary?.name} />
                   <DataTag label="Company" value={result?.candidate_summary?.current_company} />
                 </div>
@@ -179,24 +206,24 @@ export default function App() {
           </article>
         </section>
 
-        <section className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="animate-reveal" style={{ animationDelay: "200ms" }}>
-            <ListBlock
+        <section className="mt-5 grid gap-4 lg:grid-cols-2">
+          <div className="animate-reveal" style={{ animationDelay: "180ms" }}>
+            <ChipBlock
               title="Target Backgrounds"
               items={result?.candidate_search_strategy?.target_backgrounds || []}
             />
           </div>
-          <div className="animate-reveal" style={{ animationDelay: "230ms" }}>
-            <ListBlock
+          <div className="animate-reveal" style={{ animationDelay: "210ms" }}>
+            <ChipBlock
               title="Target Companies"
               items={result?.candidate_search_strategy?.target_companies || []}
             />
           </div>
-          <div className="animate-reveal" style={{ animationDelay: "260ms" }}>
-            <ListBlock title="Keywords" items={result?.candidate_search_strategy?.keywords || []} />
+          <div className="animate-reveal" style={{ animationDelay: "240ms" }}>
+            <ChipBlock title="Keywords" items={result?.candidate_search_strategy?.keywords || []} />
           </div>
-          <div className="animate-reveal" style={{ animationDelay: "290ms" }}>
-            <ListBlock
+          <div className="animate-reveal" style={{ animationDelay: "270ms" }}>
+            <ChipBlock
               title="Candidate Skills"
               items={result?.candidate_summary?.key_skills || []}
             />
@@ -204,38 +231,54 @@ export default function App() {
         </section>
 
         <section
-          className="mt-6 animate-reveal rounded-3xl border border-ink/10 bg-paper/90 p-6 shadow-card"
-          style={{ animationDelay: "340ms" }}
+          className="mt-5 animate-reveal rounded-3xl border border-ink/10 bg-paper/90 p-6 shadow-card"
+          style={{ animationDelay: "310ms" }}
         >
-          <h3 className="font-title text-2xl text-ink">Pipeline Trace</h3>
-          {!result?.pipeline_trace?.length ? (
-            <p className="mt-4 text-sm text-ink/60">Trace will appear after execution.</p>
-          ) : (
-            <div className="mt-4 grid gap-3">
-              {result.pipeline_trace.map((row, index) => (
-                <div
-                  key={`${row.step}-${row.attempt}-${index}`}
-                  className="grid gap-2 rounded-2xl border border-ink/10 bg-white/85 px-4 py-3 sm:grid-cols-[70px_1fr_auto] sm:items-center"
-                >
-                  <div className="text-xs uppercase tracking-[0.16em] text-ink/55">Step {row.step}</div>
-                  <div>
-                    <p className="text-sm font-medium text-ink">{row.action}</p>
-                    <p className="text-xs text-ink/60">{row.note || "-"}</p>
-                  </div>
-                  <span
-                    className={`justify-self-start rounded-full px-3 py-1 text-xs uppercase tracking-wide ${
-                      row.result === "pass"
-                        ? "bg-emerald-100 text-emerald-700"
-                        : row.result === "retry"
-                          ? "bg-amber-100 text-amber-700"
-                          : "bg-red-100 text-red-700"
-                    }`}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h3 className="font-title text-2xl text-ink">Pipeline Trace</h3>
+            <button
+              type="button"
+              onClick={() => setShowTrace((prev) => !prev)}
+              className="rounded-full border border-ink/20 bg-white/85 px-4 py-1.5 text-xs tracking-wide text-ink transition hover:bg-white"
+            >
+              {showTrace ? "Hide Pipeline Trace" : "Show Pipeline Trace"}
+            </button>
+          </div>
+
+          {showTrace ? (
+            !result?.pipeline_trace?.length ? (
+              <p className="mt-4 text-sm text-ink/60">Trace will appear after execution.</p>
+            ) : (
+              <div className="mt-4 grid gap-3">
+                {result.pipeline_trace.map((row, index) => (
+                  <div
+                    key={`${row.step}-${row.attempt}-${index}`}
+                    className="grid gap-2 rounded-2xl border border-ink/10 bg-white/85 px-4 py-3 sm:grid-cols-[70px_1fr_auto] sm:items-center"
                   >
-                    {row.result} · attempt {row.attempt}
-                  </span>
-                </div>
-              ))}
-            </div>
+                    <div className="text-xs uppercase tracking-[0.16em] text-ink/55">Step {row.step}</div>
+                    <div>
+                      <p className="text-sm font-medium text-ink">{row.action}</p>
+                      <p className="text-xs text-ink/60">{row.note || "-"}</p>
+                    </div>
+                    <span
+                      className={`justify-self-start rounded-full px-3 py-1 text-xs uppercase tracking-wide ${
+                        row.result === "pass"
+                          ? "bg-emerald-100 text-emerald-700"
+                          : row.result === "retry"
+                            ? "bg-amber-100 text-amber-700"
+                            : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {row.result} · attempt {row.attempt}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )
+          ) : (
+            <p className="mt-4 text-sm text-ink/60">
+              Trace is collapsed by default. Expand to inspect step-by-step execution details.
+            </p>
           )}
         </section>
       </main>

@@ -30,17 +30,6 @@ python main.py
 Output:
 - `output.json`
 
-## Frontend (React + Tailwind)
-- Frontend source is in `frontend/`
-- Uses `VITE_API_BASE_URL` to call backend API
-- Local run:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
 ## Input Format
 
 `data/input.json`:
@@ -56,6 +45,7 @@ npm run dev
 - API key is read from environment variables (`.env` supported).
 - Never hardcode API key in source code.
 - `.env` is excluded via `.gitignore`.
+- `main.py` calls `load_dotenv()`, so once `.env` is set, terminal runs will auto-use it.
 
 ## Project Structure
 
@@ -78,6 +68,3 @@ AI_Recruiting_Agent/
 
 ## Notes
 - If `OPENAI_API_KEY` is not configured, the project falls back to mock mode so local orchestration still runs.
-- For concise review, detailed run logs are documented in `SAMPLE_RUN.md`.
-- Brief design reflection answers are documented in `WRITEUP.md`.
-- Cloudflare + Railway deployment steps are documented in `DEPLOYMENT.md`.

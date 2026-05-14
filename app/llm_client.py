@@ -20,7 +20,7 @@ class LLMClient:
 
     def __init__(self) -> None:
         self.api_key = os.getenv("OPENAI_API_KEY", "").strip()
-        self.model = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        self.model = os.getenv("OPENAI_MODEL", "gpt-5.5")
         self.temperature = self._read_temperature()
         self.mock_mode = not bool(self.api_key)
         self._client = OpenAI(api_key=self.api_key) if not self.mock_mode else None
