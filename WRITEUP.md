@@ -1,4 +1,4 @@
-# Brief Write-Up
+# Brief Write-Up 
 
 ## 1) What would you improve with another week?
 - I would add a small evaluation set (different JD styles) and run prompt A/B checks, so prompt changes are measured instead of guessed.
@@ -19,3 +19,5 @@
 ## 4) Which parts used AI vs your own judgment?
 - AI-assisted parts: drafting prompt wording, generating query/outreach text, and helping iterate phrasing quickly.
 - My judgment: pipeline boundaries, data contracts, retry/validation rules, error-handling behavior, and what to keep simple vs modular.
+
+## -- Mutian He

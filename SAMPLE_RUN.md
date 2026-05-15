@@ -1,6 +1,6 @@
 # Sample Run
 
-This sample run is kept outside the main README to keep README concise.
+This sample run is kept outside the main README to keep README concise..
 
 ## Terminal Output
 

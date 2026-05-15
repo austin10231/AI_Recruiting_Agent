@@ -1,27 +1,83 @@
 {
   "candidate_search_strategy": {
     "target_backgrounds": [
-      "Applied AI Engineer",
-      "ML Engineer"
+      "AI Engineers or Software Engineers who have built and shipped LLM-powered product features in production",
+      "Full-stack or backend-leaning Python engineers with hands-on experience integrating LLMs into user-facing workflows",
+      "Startup engineers from seed to Series B environments who have demonstrated strong ownership and fast iteration",
+      "Product-minded engineers who can work with ambiguous requirements and translate customer problems into AI features",
+      "Engineers from AI-native startups, developer tools companies, productivity software companies, or vertical SaaS companies using LLMs",
+      "Former founding engineers, early engineers, or technical leads who have owned features end-to-end"
     ],
     "target_companies": [
-      "AI startups",
-      "product-focused tech teams"
+      "OpenAI",
+      "Anthropic",
+      "Cohere",
+      "Perplexity",
+      "Character.AI",
+      "Adept",
+      "LangChain",
+      "LlamaIndex",
+      "Hugging Face",
+      "Scale AI",
+      "Harvey",
+      "Glean",
+      "Notion",
+      "Cursor",
+      "Replit",
+      "Vercel",
+      "Retool",
+      "Zapier",
+      "Ramp",
+      "Mercury",
+      "Brex",
+      "Airtable",
+      "Asana",
+      "Linear",
+      "Superhuman",
+      "Intercom"
     ],
     "keywords": [
+      "AI Engineer",
+      "LLM Engineer",
+      "Machine Learning Engineer",
+      "Software Engineer AI",
       "Python",
       "LLM",
-      "Generative AI"
+      "large language models",
+      "LLM-powered features",
+      "generative AI",
+      "GenAI",
+      "OpenAI API",
+      "Anthropic Claude",
+      "LangChain",
+      "LlamaIndex",
+      "RAG",
+      "retrieval augmented generation",
+      "prompt engineering",
+      "agents",
+      "AI agents",
+      "vector databases",
+      "embeddings",
+      "product engineer",
+      "full-stack engineer",
+      "backend engineer",
+      "startup",
+      "founding engineer",
+      "early engineer",
+      "ownership",
+      "product sense",
+      "ship fast",
+      "0 to 1"
     ],
-    "seniority": "mid-to-senior"
+    "seniority": "Target mid-level to senior engineers as the primary pool, with flexibility for exceptional early-career candidates who have shipped real LLM-powered features. Prioritize candidates with startup ownership, product judgment, and ability to independently deliver quickly over strict years of experience."
   },
   "boolean_query": {
-    "boolean_query": "(\"Python\" OR \"LLM\") AND startup"
+    "boolean_query": "(\"AI Engineer\" OR \"LLM Engineer\" OR \"Machine Learning Engineer\" OR \"Software Engineer\" OR \"Backend Engineer\" OR \"Full Stack Engineer\" OR \"Product Engineer\") AND Python AND (LLM OR \"large language models\" OR \"generative AI\" OR GenAI OR \"OpenAI API\" OR Claude OR LangChain OR LlamaIndex OR RAG OR embeddings OR \"AI agents\") AND (startup OR \"founding engineer\" OR \"early engineer\" OR ownership OR \"0 to 1\" OR shipped OR production OR \"user-facing\")"
   },
   "outreach_message": {
-    "outreach_message": "Hi, your work on LLM-powered features looks relevant to our startup AI role. Would you be open to a quick intro chat this week?",
-    "specific_detail": "LLM-powered features",
-    "character_count": 127,
+    "outreach_message": "Your mix of Python, LLM product work, and startup-style ownership looks spot-on for an AI Engineer role building user-facing LLM features and shipping fast. Open to a quick chat?",
+    "specific_detail": "AI Engineer",
+    "character_count": 178,
     "attempts": 1
   },
   "candidate_summary": {
@@ -29,11 +85,13 @@
     "current_company": "NovaAI",
     "key_skills": [
       "Python",
-      "LLM",
-      "MLOps"
+      "LLM-powered feature development",
+      "RAG",
+      "OpenAI API integration",
+      "Product ownership"
     ],
-    "fit_reason": "Strong match with JD focus on LLM feature delivery in startup settings.",
-    "concerns": "Need deeper validation of domain depth and leadership scope."
+    "fit_reason": "Product-minded AI engineer at a startup who has built and shipped user-facing LLM features in Python, with strong end-to-end ownership and fast iteration in ambiguous environments.",
+    "concerns": "Specific experience with the company’s preferred LLM frameworks, cloud stack, and seniority expectations is not yet confirmed."
   },
   "pipeline_trace": [
     {
