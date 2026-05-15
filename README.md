@@ -37,7 +37,7 @@ Output:
 Run with a custom input file:
 
 ```bash
-python main.py data/my_input.json
+python main.py data/input.json
 ```
 
 ## Input Format
