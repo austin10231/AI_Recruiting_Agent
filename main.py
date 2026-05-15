@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import sys
 from pathlib import Path
+import os
 
 from app.orchestrator import RecruitingPipelineOrchestrator
 from app.output_schema import validate_output_payload
